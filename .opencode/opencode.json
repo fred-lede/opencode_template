@@ -1,0 +1,172 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  "default_agent": "builder",
+
+  "provider": {
+    "ollama-1": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama-UM890-1",
+      "options": {
+        "baseURL": "http://dreamcloud.myds.me:11200/v1",
+        "apiKey": "ollama"
+      },
+      "models": {
+		"gemma4:e4b": {
+          "name": "Gemma4 E4B (local)"
+        },
+		"gemma4:31b": {
+          "name": "Gemma4 31B (local)"
+        },
+		"gemma4:26b": {
+          "name": "Gemma4 26B (local)"
+        }
+      }
+    },
+	
+	"ollama-2": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama-UM890-2",
+      "options": {
+        "baseURL": "http://dreamcloud.myds.me:11201/v1",
+        "apiKey": "ollama"
+      },
+      "models": {
+        "gemma4:e4b": {
+          "name": "Gemma4 E4B (local)"
+        }
+      }
+    },
+
+    "AIIH": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "AIIH-UM890",
+      "options": {
+        "baseURL": "https://dreamcloud.myds.me:8001/v1",
+        "apiKey": "aiih"
+      },
+      "models": {
+        "gemma4:31b": {
+          "name": "Gemma4 31B (local)"
+        },
+		"gemma4:26b": {
+          "name": "Gemma4 26B (local)"
+        },
+		"gemma4:e4b": {
+          "name": "Gemma4 E4B (local)"
+        },
+        "qwen3.5:0.8b": {
+          "name": "Qwen3.5 0.8B (local)"
+        }
+      }
+    }
+  },
+
+  "agent": {
+    "builder": {
+      "mode": "primary",
+      "description": "Main development agent. Handles coding, file edits, terminal work, and delegates specialized subtasks when needed.",
+      "model": "ollama-1/gemma4:e4b",
+      "temperature": 0.2,
+      "steps": 1200,
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      },
+      "prompt": "{file:./agents/builder.txt}",
+      "permission": {
+        "task": {
+          "*": "deny",
+          "planner": "allow",
+          "architect": "allow",
+          "tester": "allow",
+          "debugger": "allow",
+          "reviewer": "allow",
+          "docs": "allow"
+        }
+      }
+    },
+
+    "planner": {
+      "mode": "subagent",
+      "description": "Analyze the task, break it into steps, and decide which specialist agent should handle each part.",
+      "model": "ollama-2/gemma4:e4b",
+      "temperature": 0.1,
+      "tools": {
+        "write": false,
+        "edit": false,
+        "bash": false
+      },
+      "prompt": "{file:./agents/planner.txt}"
+    },
+
+    "architect": {
+      "mode": "subagent",
+      "description": "Design architecture, module boundaries, interfaces, and implementation strategy.",
+      "model": "ollama-2/gemma4:e4b",
+      "temperature": 0.1,
+      "tools": {
+        "write": false,
+        "edit": false,
+        "bash": false
+      },
+      "prompt": "{file:./agents/architect.txt}"
+    },
+
+    "tester": {
+      "mode": "subagent",
+      "description": "Generate, update, and run tests.",
+      "model": "ollama-2/gemma4:e2b",
+      "temperature": 0.2,
+      "steps": 500,
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      },
+      "prompt": "{file:./agents/tester.txt}"
+    },
+
+    "debugger": {
+      "mode": "subagent",
+      "description": "Analyze failures, inspect logs, and propose or apply targeted fixes.",
+      "model": "ollama-2/gemma4:e2b",
+      "temperature": 0.2,
+      "steps": 1200,
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": true
+      },
+      "prompt": "{file:./agents/debugger.txt}"
+    },
+
+    "reviewer": {
+      "mode": "subagent",
+      "description": "Read-only code review for correctness, maintainability, and risk detection.",
+      "model": "ollama-2/gemma4:e2b",
+      "temperature": 0.1,
+      "tools": {
+        "write": false,
+        "edit": false,
+        "bash": false
+      },
+      "prompt": "{file:./agents/reviewer.txt}"
+    },
+
+    "docs": {
+      "mode": "subagent",
+      "description": "Generate README, changelog, usage notes, and developer documentation.",
+      "model": "ollama-2/gemma4:e2b",
+      "temperature": 0.4,
+      "steps": 300,
+      "tools": {
+        "write": true,
+        "edit": true,
+        "bash": false
+      },
+      "prompt": "{file:./agents/docs.txt}"
+    }
+  }
+}

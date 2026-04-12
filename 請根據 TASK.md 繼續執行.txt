@@ -1,0 +1,13 @@
+請開始 code review，並維護 TASK.md
+
+實際操作流程（你照這樣用）
+🥇 Step 1：開始任務
+請開始 code review，並維護 TASK.md
+
+🥈 Step 2：中途爆 rate limit
+
+👉 直接：等20秒 → 重新開 session
+
+🥉 Step 3：續跑
+請根據 TASK.md 繼續
+

@@ -1,0 +1,15 @@
+agents:
+- name: planner
+  role: strategist
+- name: builder
+  role: code_writer
+- name: architect
+  role: system_designer
+- name: reviewer
+  role: quality_checker
+- name: tester
+  role: tester
+- name: debugger
+  role: issue_resolver
+- name: docs
+  role: documentation

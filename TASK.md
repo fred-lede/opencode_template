@@ -1,23 +1,15 @@
-# 📋 Project Initialization Task List
+# Task State
 
-This file contains the initial tasks required to set up a new project from this template.
+Completed
+- Created initial OpenCode personal template scaffold under opencode_template with system-fixed and editable content placeholders.
+- Added cross-platform bootstrap scripts (setup_template.sh, setup_template.ps1).
+- Created minimal documentation skeletons (README, AGENTS, TASK/PROGRESS/HANDOFF, MIGRATION_GUIDE).
+- Defined .opencode config and agent manifest skeletons.
 
-## 🛠️ Initial Setup
+In Progress
+- Review and refinement of placeholder content across docs/ and specs/.
+- Validate patch applicability on both Windows and POSIX environments.
 
-- [ ] **Project Configuration**
-    - [ ] Rename directory to project name
-    - [ ] Initialize Git repository (`git init`)
-    - [ ] Configure `.gitignore` for the specific project needs
-- [ ] **Documentation Setup**
-    - [ ] Define project goals in `docs/requirements.md`
-    - [ ] Sketch high-level architecture in `docs/architecture.md`
-    - [ ] Outline core API endpoints in `docs/api_spec.md`
-- [ ] **Agent Setup**
-    - [ ] Review and refine `.opencode/agents.yaml` if necessary
-    - [ ] Add any project-supported system prompts to `.opencode/prompts/`
-- [ ] **Task Management**
-    - [ ] Create the first feature breakdown in `specs/feature_list.md`
-    - [ ] Add detailed implementation tasks to `TASK.md`
-
-## 🚀 Ready to Develop
-Once the items above are completed, you can begin the actual coding phase.
+Pending
+- Create example project to validate the end-to-end onboarding flow.
+- Add automated tests to verify bootstrap and placeholder replacement.

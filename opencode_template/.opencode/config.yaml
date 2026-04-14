@@ -1,0 +1,43 @@
+version: "1.0"
+template: "opencode_template"
+agents:
+  planner:
+    role: "strategist"
+    max_steps: 10
+  builder:
+    role: "code_writer"
+    max_files_per_batch: 3
+  architect:
+    role: "system_designer"
+  reviewer:
+    role: "quality_checker"
+  tester:
+    role: "tester"
+  debugger:
+    role: "issue_resolver"
+
+rate_limits:
+  max_parallel_requests: 1
+  max_tool_calls_per_response: 2
+  retry_delay_seconds: 20
+  max_retries: 1
+
+docs:
+  requirements: "docs/requirements.md"
+  architecture: "docs/architecture.md"
+  api_spec: "docs/api_spec.md"
+  database_schema: "docs/database_schema.md"
+
+specs:
+  feature_list: "specs/feature_list.md"
+  features_dir: "specs/features/"
+
+task_management:
+  task_file: "TASK.md"
+  progress_file: "PROGRESS.md"
+  handoff_file: "HANDOFF.md"
+
+placeholders:
+  PROJECT_NAME: "Replace with your project name"
+  DATE: "Auto-filled on each update"
+  AUTHOR: "Replace with project author"
